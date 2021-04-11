@@ -11,7 +11,7 @@ from slackviewer.reader import Reader
 from slackviewer.archive import get_export_info
 from jinja2 import Environment, PackageLoader
 
-from slackviewer.export import export_multi
+from slackviewer import export
 
 
 @click.group()
@@ -66,4 +66,4 @@ def export(archive_dir):
 @click.option("-c", "--cache", type=click.Path(),
               help="Path to your archive cache directory")
 def export_multi(archive, save_dir=None, cache_dir=None):
-    export_multi(archive, save_dir, cache_dir)
+    export.export_multi(archive, save_dir, cache_dir)
