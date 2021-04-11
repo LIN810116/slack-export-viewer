@@ -22,9 +22,9 @@ def export_multi(archive, save_dir=None, cache_dir=None):
 
     # save dir
     if save_dir is None:
-        save_dir = os.path.join("static", export_file_info["stripped_name"])
+        save_dir = os.path.join(os.getcwd(), "static")
     else:
-        save_dir = os.path.join(save_dir, "static", export_file_info["stripped_name"])
+        save_dir = os.path.join(save_dir, "static")
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
     # copy css
