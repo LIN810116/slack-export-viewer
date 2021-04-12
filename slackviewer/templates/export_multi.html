@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% from "util.html" import render_message %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ workspace_name }}</title>
+    <link rel=stylesheet type=text/css href="viewer.css">
+</head>
+<body>
+<div id="slack-archive-viewer">
+    <div id="sidebar">
+        <h3 id="channel-title">Public Channels</h3>
+        <ul class="list" id="channel-list">
+            {% for name in channel_names %}
+                <li class="channel{% if name == channel.get("channel_name") %} active{% endif %}">
+                    <a href="{{name}}.html">
+                        # {{ name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="messages">
+        {% for message in channel.messages %}
+            {{render_message(message)}}
+        {% endfor %}
+    </div>
+</div>
+
+
+<script>
+(function() {
+  let sidebar = document.querySelector('#sidebar');
+  let selected = document.querySelector('.active');
+  sidebar.scrollTop = selected.offsetTop - 200;
+
+  // make dropdown from channel title
+  let channel_title = document.querySelector("#channel-title");
+  let channel_dropdown = document.querySelector("#channel-list");
+  channel_title.addEventListener('click', function() {
+    channel_title.classList.toggle('arrow');
+    channel_dropdown.classList.toggle('close');
+  });
+})()
+</script>
+
+</body>
+</html>
